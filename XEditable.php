@@ -553,24 +553,6 @@ class XEditable extends \yii\base\Widget
 		}
 	}
 
-	public static function saveAction($data)
-	{
-		$model = ArrayHelper::getValue($data,'model');
-		$name = ArrayHelper::getValue($data,'name');
-		$value = ArrayHelper::getValue($data,'value');
-
-		if($model===null)
-			throw new NotFoundHttpException();
-		
-		$model->$name = $value;
-
-		if ($model->validate()){
-			$model->update();
-		}else{
-			VarDumper::dump($model->getErrors(),10);
-		}
-	}
-
 	/**
 	 * @see Xeditable
 	 * @see Register assets from this extension and yours types

@@ -7,36 +7,59 @@
 namespace mcms\xeditable;
 
 use yii\base\Action;
-use yii\console\Response;
-use yii\helpers\VarDumper;
+use yii\db\ActiveRecord;
+use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 class XEditableAction extends Action
 {
-	public $modelclass;
-	public $scenario='';
+    public $modelclass;
+    public $scenario = '';
 
-	/**
-	 * @inheritdoc
-	 */
-	public function run()
-	{
-		if (\Yii::$app->request->isAjax) {
-			$pk=$_POST['pk'];
-			$name=$_POST['name'];
-			$value=$_POST['value'];
+    /**
+     * @inheritdoc
+     */
+    public function run()
+    {
+        if (\Yii::$app->request->isAjax) {
+            $pk = $_POST['pk'];
+            $attribute = $_POST['name'];
+            $value = $_POST['value'];
 
-			$modelclass=$this->modelclass;
-			$model= $modelclass::findOne($pk);
-			if($this->scenario){
-				$model->setScenario($this->scenario);
-			}
+            $modelclass = $this->modelclass;
 
-			XEditable::saveAction([
-				'name' => $name,
-				'value' => $value,
-				'model' => $model,
-			]);
-		}
-	}
+            /** @var ActiveRecord $model */
+            $model = $modelclass::findOne($pk);
+            if ($this->scenario) {
+                $model->setScenario($this->scenario);
+            }
+
+            if ($model === null) {
+                throw new NotFoundHttpException();
+            }
+
+            $model->$attribute = $value;
+
+            if ($model->validate()) {
+                try {
+                    $model->update();
+
+                    return new Response([
+                        'content' => 'Updated!',
+                    ]);
+                } catch (\Exception $e) {
+                    return new Response([
+                        'content' => $e->getMessage(),
+                        'statusCode' => 400,
+                    ]);
+                }
+            } else {
+                return new Response([
+                    'content' => $model->getFirstError($attribute),
+                    'statusCode' => 400,
+                ]);
+            }
+        }
+    }
 }
