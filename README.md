@@ -1,4 +1,4 @@
-MCMS X-Editable
+kotchuprik X-Editable
 ===============
 X-editable extensions for Yii 2, based in X-editable 1.5.1 with Bootstrap 3
 Link from project - http://vitalets.github.io/x-editable/
@@ -11,13 +11,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require marciocamello/yii2-x-editable "dev-master"
+php composer.phar require kotchuprik/yii2-x-editable "dev-master"
 ```
 
 or add
 
 ```
-"marciocamello/yii2-x-editable": "*"
+"kotchuprik/yii2-x-editable": "*"
 ```
 
 to the require section of your `composer.json` file.
@@ -35,7 +35,7 @@ XEditable NameSpace and Model params
 
 <?php
 
-use mcms\xeditable\XEditable;
+use kotchuprik\xeditable\XEditable;
 
 $model = Model::findOne($id);
 
@@ -51,7 +51,7 @@ Actions
 	{
 		return [
 			'editable' => [
-				'class' => 'mcms\xeditable\XEditableAction',
+				'class' => 'kotchuprik\xeditable\XEditableAction',
 				//'scenario'=>'editable',  //optional
 				'modelclass' => Model::className(),
 			],
@@ -71,7 +71,7 @@ echo XEditable::widget([
 
 echo '<br>';
 
-echo \mcms\xeditable\XEditableText::widget([
+echo \kotchuprik\xeditable\XEditableText::widget([
 	'value' => 'With XEditableText'
 ]);
 
@@ -84,7 +84,7 @@ Text
 ```
 <?php
 
-echo \mcms\xeditable\XEditableText::widget([
+echo \kotchuprik\xeditable\XEditableText::widget([
 	'model' => $model,
 	'placement' => 'right',
 	'pluginOptions' => [
@@ -110,7 +110,7 @@ Text Toggle Manual
 ```
 <?php
 
-echo \mcms\xeditable\XEditableText::widget([
+echo \kotchuprik\xeditable\XEditableText::widget([
 	'model' => $model,
 	'placement' => 'right',
 	'pluginOptions' => [
@@ -137,7 +137,7 @@ TextArea
 ```
 <?php
 
-echo \mcms\xeditable\XEditableTextArea::widget([
+echo \kotchuprik\xeditable\XEditableTextArea::widget([
 	'model' => $model,
 	'placement' => 'right',
 	'pluginOptions' => [
@@ -154,7 +154,7 @@ Select
 ```
 <?php
 
-echo \mcms\xeditable\XEditableSelect::widget([
+echo \kotchuprik\xeditable\XEditableSelect::widget([
 	'model' => $model,
 	'placement' => 'right',
 	'pluginOptions' => [
@@ -175,7 +175,7 @@ Date
 ```
 <?php
 
-echo \mcms\xeditable\XEditableDate::widget([
+echo \kotchuprik\xeditable\XEditableDate::widget([
 	'model' => $model,
 	'placement' => 'right',
 	'pluginOptions' => [
@@ -198,7 +198,7 @@ DateTime
 ```
 <?php
 
-echo \mcms\xeditable\XEditableDateTime::widget([
+echo \kotchuprik\xeditable\XEditableDateTime::widget([
 	'model' => $model,
 	'placement' => 'right',
 	'pluginOptions' => [
@@ -221,7 +221,7 @@ ComboDate
 ```
 <?php
 
-echo \mcms\xeditable\XEditableComboDate::widget([
+echo \kotchuprik\xeditable\XEditableComboDate::widget([
 	'model' => $model,
 	'placement' => 'right',
 	'type' => 'combodate',
@@ -248,7 +248,7 @@ Checklist
 ```
 <?php
 
-echo \mcms\xeditable\XEditableCheckList::widget([
+echo \kotchuprik\xeditable\XEditableCheckList::widget([
 	'model' => $model,
 	'placement' => 'right',
 	'pluginOptions' => [
@@ -272,7 +272,7 @@ HTML Editor - WysiHtml5
 ```
 <?php
 
-echo \mcms\xeditable\XEditableWysiHtml5::widget([
+echo \kotchuprik\xeditable\XEditableWysiHtml5::widget([
 	'type' => 'wysihtml5',
 	'model' => $model,
 	'pluginOptions' => [
@@ -303,7 +303,7 @@ echo GridView::widget([
 			'value'=>function($model) {
 				return $model->active;
 			},
-			'class' => \mcms\xeditable\XEditableColumn::className(),
+			'class' => \kotchuprik\xeditable\XEditableColumn::className(),
 			'url' => 'editable',
 			'dataType'=>'select',
 			'editable'=>[

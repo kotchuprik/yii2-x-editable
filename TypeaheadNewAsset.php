@@ -7,6 +7,7 @@
  */
 
 namespace kartik\widgets;
+use yii\web\AssetBundle;
 
 /**
  * Asset bundle for Typeahead Widget

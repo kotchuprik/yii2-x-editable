@@ -4,7 +4,7 @@
  * @inheritdoc
  */
 
-namespace mcms\xeditable;
+namespace kotchuprik\xeditable;
 
 use yii\grid\DataColumn;
 use yii\helpers\ArrayHelper;
