@@ -1,5 +1,5 @@
 kotchuprik X-Editable
-===============
+=====================
 X-editable extensions for Yii 2, based in X-editable 1.5.1 with Bootstrap 3
 Link from project - http://vitalets.github.io/x-editable/
 
@@ -28,354 +28,329 @@ Usage
 
 Once the extension is installed, simply use it in your code by :
 
-XEditable NameSpace and Model params
-------------
+Actions
+-------
 
 ```php
-
-<?php
-
-use kotchuprik\xeditable\XEditable;
-
-$model = Model::findOne($id);
-
-?>
-
-```
-
-Actions
-------------
-
-```
-	public function actions()
-	{
-		return [
-			'editable' => [
-				'class' => 'kotchuprik\xeditable\XEditableAction',
-				//'scenario'=>'editable',  //optional
-				'modelclass' => Model::className(),
-			],
-		];
-	}
+public function actions()
+{
+    return [
+        'editable' => [
+            'class' => XEditableAction::className(),
+            //'scenario' => 'editable',  //optional
+            'modelclass' => Model::className(),
+        ],
+    ];
+}
 ```
 
 Text whitout model
-------------
+------------------
 
-```
-<?php
-
+```php
 echo XEditable::widget([
-	'value' => 'With Xeditable'
+    'value' => 'With Xeditable',
 ]);
 
 echo '<br>';
 
-echo \kotchuprik\xeditable\XEditableText::widget([
-	'value' => 'With XEditableText'
+echo XEditableText::widget([
+    'value' => 'With XEditableText',
 ]);
-
-?>
 ```
 
 Text
-------------
+----
 
-```
-<?php
-
-echo \kotchuprik\xeditable\XEditableText::widget([
-	'model' => $model,
-	'placement' => 'right',
-	'pluginOptions' => [
-		'name' => 'title',
-	],
-	'callbacks' => [
-		'validate' => new \yii\web\JsExpression('
-			function(value) {
-				if($.trim(value) == "") {
-					return "This field is required";
-				}
-			}
-		')
-	]
+```php
+echo XEditableText::widget([
+    'model' => $model,
+    'placement' => 'right',
+    'pluginOptions' => [
+        'name' => 'title',
+    ],
+    'callbacks' => [
+        'validate' => new \yii\web\JsExpression('
+            function(value) {
+                if($.trim(value) == "") {
+                    return "This field is required";
+                }
+            }
+        ')
+    ]
 ]);
-
-?>
 ```
 
 Text Toggle Manual
-------------
+------------------
 
-```
-<?php
-
-echo \kotchuprik\xeditable\XEditableText::widget([
-	'model' => $model,
-	'placement' => 'right',
-	'pluginOptions' => [
-		'toggle' => 'manual',
-		'name' => 'title',
-	],
-	'callbacks' => [
-		'validate' => new \yii\web\JsExpression('
-			function(value) {
-				if($.trim(value) == "") {
-					return "This field is required";
-				}
-			}
-		')
-	]
+```php
+echo XEditableText::widget([
+    'model' => $model,
+    'placement' => 'right',
+    'pluginOptions' => [
+        'toggle' => 'manual',
+        'name' => 'title',
+    ],
+    'callbacks' => [
+        'validate' => new \yii\web\JsExpression('
+            function(value) {
+                if($.trim(value) == "") {
+                    return "This field is required";
+                }
+            }
+        ')
+    ]
 ]);
-
-?>
 ```
 
 TextArea
-------------
+--------
 
-```
-<?php
-
-echo \kotchuprik\xeditable\XEditableTextArea::widget([
-	'model' => $model,
-	'placement' => 'right',
-	'pluginOptions' => [
-		'name' => 'content',
-	],
+```php
+echo XEditableTextArea::widget([
+    'model' => $model,
+    'placement' => 'right',
+    'pluginOptions' => [
+        'name' => 'content',
+    ],
 ]);
-
-?>
 ```
 
 Select
-------------
+------
 
-```
-<?php
-
-echo \kotchuprik\xeditable\XEditableSelect::widget([
-	'model' => $model,
-	'placement' => 'right',
-	'pluginOptions' => [
-		'name' => 'status',
-		'source'=>[
-			['value'=>1,
-				'text'=>Yii::t('app','On')],
-			['value'=>0,
-				'text'=>Yii::t('app','Off')]
-		],
-	],
-]); ?>
+```php
+echo XEditableSelect::widget([
+    'model' => $model,
+    'placement' => 'right',
+    'pluginOptions' => [
+        'name' => 'status',
+        'source'=>[
+            [
+                'value' => 1,
+                'text' => Yii::t('app', 'On'),
+            ],
+            [
+                'value' => 0,
+                'text' => Yii::t('app', 'Off'),
+            ],
+        ],
+    ],
+]);
 ```
 
 Date
-------------
+----
 
-```
-<?php
-
-echo \kotchuprik\xeditable\XEditableDate::widget([
-	'model' => $model,
-	'placement' => 'right',
-	'pluginOptions' => [
-		'name' => 'created_at',
-		'value' => date('Y-m-d',$model->created_at),
-		'format' => 'yyyy-mm-dd',
-		'viewformat' => 'dd/mm/yyyy',
-		'datepicker' => [
-			[
-				'weekStart' => 1
-			]
-		],
-	]
-]); ?>
+```php
+echo XEditableDate::widget([
+    'model' => $model,
+    'placement' => 'right',
+    'pluginOptions' => [
+        'name' => 'created_at',
+        'value' => date('Y-m-d', $model->created_at),
+        'format' => 'yyyy-mm-dd',
+        'viewformat' => 'dd/mm/yyyy',
+        'datepicker' => [
+            [
+                'weekStart' => 1,
+            ],
+        ],
+    ],
+]);
 ```
 
 DateTime
-------------
+--------
 
-```
-<?php
-
-echo \kotchuprik\xeditable\XEditableDateTime::widget([
-	'model' => $model,
-	'placement' => 'right',
-	'pluginOptions' => [
-		'name' => 'created_at',
-		'value' => date('Y-m-d h:i',$model->created_at),
-		'format' => 'yyyy-mm-dd hh:ii',
-		'viewformat' => 'dd/mm/yyyy hh:ii',
-		'datepicker' => [
-			[
-				'weekStart' => 1
-			]
-		],
-	]
-]); ?>
+```php
+echo XEditableDateTime::widget([
+    'model' => $model,
+    'placement' => 'right',
+    'pluginOptions' => [
+        'name' => 'created_at',
+        'value' => date('Y-m-d h:i', $model->created_at),
+        'format' => 'yyyy-mm-dd hh:ii',
+        'viewformat' => 'dd/mm/yyyy hh:ii',
+        'datepicker' => [
+            [
+                'weekStart' => 1,
+            ],
+        ],
+    ],
+]);
 ```
 
 ComboDate
-------------
+---------
 
-```
-<?php
-
-echo \kotchuprik\xeditable\XEditableComboDate::widget([
-	'model' => $model,
-	'placement' => 'right',
-	'type' => 'combodate',
-	'pluginOptions' => [
-		'name' => 'created_at',
-		'value' => date('Y-m-d h:i',$model->created_at),
-		'format'      => 'YYYY-MM-DD HH:mm',
-		'viewformat'  => 'MMM DD, YYYY HH:mm',
-		'template'    => 'DD / MMM / YYYY HH:mm',
-		'combodate' => [
-			[
-				'minYear' => '2000',
-				'maxYear' => '2015',
-				'minuteStep' => '1'
-			]
-		],
-	]
-]); ?>
+```php
+echo XEditableComboDate::widget([
+    'model' => $model,
+    'placement' => 'right',
+    'type' => 'combodate',
+    'pluginOptions' => [
+        'name' => 'created_at',
+        'value' => date('Y-m-d h:i', $model->created_at),
+        'format' => 'YYYY-MM-DD HH:mm',
+        'viewformat' => 'MMM DD, YYYY HH:mm',
+        'template' => 'DD / MMM / YYYY HH:mm',
+        'combodate' => [
+            [
+                'minYear' => 2000,
+                'maxYear' => 2015,
+                'minuteStep' => 1,
+            ],
+        ],
+    ]
+]);
 ```
 
 Checklist
-------------
+---------
 
-```
-<?php
-
-echo \kotchuprik\xeditable\XEditableCheckList::widget([
-	'model' => $model,
-	'placement' => 'right',
-	'pluginOptions' => [
-		'name' => 'image',
-		'source'=>[
-			['value'=>'option1',
-				'text'=>Yii::t('app','option1')],
-			['value'=>'option2',
-				'text'=>Yii::t('app','option2')],
-			['value'=>'option3',
-				'text'=>Yii::t('app','option3')]
-		],
-	],
-]); ?>
-
+```php
+echo XEditableCheckList::widget([
+    'model' => $model,
+    'placement' => 'right',
+    'pluginOptions' => [
+        'name' => 'image',
+        'source' => [
+            [
+                'value' => 'option1',
+                'text' => Yii::t('app', 'option1'),
+            ],
+            [
+                'value' => 'option2',
+                'text' => Yii::t('app', 'option2'),
+            ],
+            [
+                'value' => 'option3',
+                'text' => Yii::t('app', 'option3'),
+            ],
+        ],
+    ],
+]);
 ```
 
 HTML Editor - WysiHtml5
-------------
+-----------------------
 
-```
-<?php
-
-echo \kotchuprik\xeditable\XEditableWysiHtml5::widget([
-	'type' => 'wysihtml5',
-	'model' => $model,
-	'pluginOptions' => [
-		'toggle' => 'manual',
-		'name' => 'content',
-		'title' => 'Enter comments',
-	],
-]); ?>
+```php
+echo XEditableWysiHtml5::widget([
+    'type' => 'wysihtml5',
+    'model' => $model,
+    'pluginOptions' => [
+        'toggle' => 'manual',
+        'name' => 'content',
+        'title' => 'Enter comments',
+    ],
+]);
 ```
 
 DataGrid
-------------
+--------
 
-```
-<?php
+```php
 $provider = new \yii\data\ActiveDataProvider([
-	'query' => \backend\modules\cms\models\Categories::find(),
-	'pagination' => [
-		'pageSize' => 4,
-	],
+    'query' => Categories::find(),
+    'pagination' => [
+        'pageSize' => 4,
+    ],
 ]);
 
 echo GridView::widget([
-	'id' => Yii::$app->controller->id,
-	'dataProvider' => $provider,
-	'columns' => [
-		[
-			'value'=>function($model) {
-				return $model->active;
-			},
-			'class' => \kotchuprik\xeditable\XEditableColumn::className(),
-			'url' => 'editable',
-			'dataType'=>'select',
-			'editable'=>[
-				'source'=>[
-					['value'=>1,
-						'text'=>Yii::t('app','On')],
-					['value'=>0,
-						'text'=>Yii::t('app','Off')]
-				],
-				'placement' => 'right',
-			],
-			'attribute' => 'status',
-			'format' => 'raw',
-		],
-		'title',
-	]
+    'id' => Yii::$app->controller->id,
+    'dataProvider' => $provider,
+    'columns' => [
+        [
+            'value' => function($model) {
+                return $model->active;
+            },
+            'class' => XEditableColumn::className(),
+            'url' => 'editable',
+            'dataType' => 'select',
+            'editable'=>[
+                'source'=>[
+                    [
+                        'value' => 1,
+                        'text' => Yii::t('app', 'On'),
+                    ],
+                    [
+                        'value' => 0,
+                        'text' => Yii::t('app', 'Off'),
+                    ],
+                ],
+                'placement' => 'right',
+            ],
+            'attribute' => 'status',
+            'format' => 'raw',
+        ],
+        'title',
+    ],
 ]);
-?>
 ```
 
 Select2
-------------
+-------
 
-```
-<?php
-
+```php
 $items = [
-	['value'=>'gb',
-		'text'=>Yii::t('app','Great Britain')],
-	['value'=>'us',
-		'text'=>Yii::t('app','United States')],
-	['value'=>'ru',
-		'text'=>Yii::t('app','Russia')]
+    [
+        'value' => 'gb',
+        'text' => Yii::t('app', 'Great Britain'),
+    ],
+    [
+        'value' => 'us',
+        'text' => Yii::t('app', 'United States')],
+    [
+        'value' => 'ru',
+        'text' => Yii::t('app', 'Russia'),
+    ]
 ];
 
 echo XEditable::widget([
-	'placement' => 'right',
-	'type' => 'select2',
-	'pluginOptions' => [
-		'value' => 'ru',
-		'source'=> $items,
-		'select2' => [
-			'multiple' => true
-		],
-	]
-]); ?>
+    'placement' => 'right',
+    'type' => 'select2',
+    'pluginOptions' => [
+        'value' => 'ru',
+        'source'=> $items,
+        'select2' => [
+            'multiple' => true
+        ],
+    ]
+]);
 ```
 
 TypeAheadJs
-------------
+-----------
 
-```
-<?php
-
+```php
 $items = [
-	['value'=>'gb',
-		'text'=>Yii::t('app','Great Britain')],
-	['value'=>'us',
-		'text'=>Yii::t('app','United States')],
-	['value'=>'ru',
-		'text'=>Yii::t('app','Russia')]
+    [
+        'value' => 'gb',
+        'text' => Yii::t('app', 'Great Britain'),
+    ],
+    [
+        'value' => 'us',
+        'text' => Yii::t('app', 'United States'),
+    ],
+    [
+        'value' => 'ru',
+        'text' => Yii::t('app', 'Russia'),
+    ],
 ];
 
 echo XEditable::widget([
-	'placement' => 'right',
-	'type' => 'typeaheadjs',
-	'pluginOptions' => [
-		'value' => 'ru',
-		'typeahead' => [
-			'name' => 'country',
-			'local' => $items,
-		],
-	]
-]); ?>
+    'placement' => 'right',
+    'type' => 'typeaheadjs',
+    'pluginOptions' => [
+        'value' => 'ru',
+        'typeahead' => [
+            'name' => 'country',
+            'local' => $items,
+        ],
+    ]
+]);
 ```
