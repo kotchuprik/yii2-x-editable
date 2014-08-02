@@ -14,7 +14,7 @@ use yii\web\Response;
 
 class XEditableAction extends Action
 {
-    public $modelclass;
+    public $modelClass;
     public $scenario = '';
 
     /**
@@ -27,10 +27,10 @@ class XEditableAction extends Action
             $attribute = $_POST['name'];
             $value = $_POST['value'];
 
-            $modelclass = $this->modelclass;
+            $modelClass = $this->modelClass;
 
             /** @var ActiveRecord $model */
-            $model = $modelclass::findOne($pk);
+            $model = $modelClass::findOne($pk);
             if ($this->scenario) {
                 $model->setScenario($this->scenario);
             }
