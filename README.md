@@ -38,7 +38,7 @@ public function actions()
         'editable' => [
             'class' => XEditableAction::className(),
             //'scenario' => 'editable',  //optional
-            'modelclass' => Model::className(),
+            'modelClass' => Model::className(),
         ],
     ];
 }
