@@ -354,3 +354,7 @@ echo XEditable::widget([
     ]
 ]);
 ```
+
+## Features
+
+- Server-side validation support (error messages output after validation).
