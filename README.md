@@ -38,7 +38,7 @@ public function actions()
         'editable' => [
             'class' => XEditableAction::className(),
             //'scenario' => 'editable',  //optional
-            'modelclass' => Model::className(),
+            'modelClass' => Model::className(),
         ],
     ];
 }
@@ -48,13 +48,7 @@ Text whitout model
 ------------------
 
 ```php
-echo XEditable::widget([
-    'value' => 'With Xeditable',
-]);
-
-echo '<br>';
-
-echo XEditableText::widget([
+echo \kotchuprik\xeditable\widgets\TextField::widget([
     'value' => 'With XEditableText',
 ]);
 ```
@@ -63,7 +57,7 @@ Text
 ----
 
 ```php
-echo XEditableText::widget([
+echo \kotchuprik\xeditable\widgets\TextField::widget([
     'model' => $model,
     'placement' => 'right',
     'pluginOptions' => [
@@ -85,7 +79,7 @@ Text Toggle Manual
 ------------------
 
 ```php
-echo XEditableText::widget([
+echo \kotchuprik\xeditable\widgets\TextField::widget([
     'model' => $model,
     'placement' => 'right',
     'pluginOptions' => [
@@ -108,7 +102,7 @@ TextArea
 --------
 
 ```php
-echo XEditableTextArea::widget([
+echo \kotchuprik\xeditable\widgets\TextArea::widget([
     'model' => $model,
     'placement' => 'right',
     'pluginOptions' => [
@@ -121,7 +115,7 @@ Select
 ------
 
 ```php
-echo XEditableSelect::widget([
+echo \kotchuprik\xeditable\widgets\Select::widget([
     'model' => $model,
     'placement' => 'right',
     'pluginOptions' => [
@@ -144,7 +138,7 @@ Date
 ----
 
 ```php
-echo XEditableDate::widget([
+echo \kotchuprik\xeditable\widgets\Date::widget([
     'model' => $model,
     'placement' => 'right',
     'pluginOptions' => [
@@ -165,7 +159,7 @@ DateTime
 --------
 
 ```php
-echo XEditableDateTime::widget([
+echo \kotchuprik\xeditable\widgets\DateTime::widget([
     'model' => $model,
     'placement' => 'right',
     'pluginOptions' => [
@@ -186,7 +180,7 @@ ComboDate
 ---------
 
 ```php
-echo XEditableComboDate::widget([
+echo \kotchuprik\xeditable\widgets\ComboDate::widget([
     'model' => $model,
     'placement' => 'right',
     'type' => 'combodate',
@@ -211,7 +205,7 @@ Checklist
 ---------
 
 ```php
-echo XEditableCheckList::widget([
+echo \kotchuprik\xeditable\widgets\CheckList::widget([
     'model' => $model,
     'placement' => 'right',
     'pluginOptions' => [
@@ -238,56 +232,12 @@ HTML Editor - WysiHtml5
 -----------------------
 
 ```php
-echo XEditableWysiHtml5::widget([
-    'type' => 'wysihtml5',
+echo \kotchuprik\xeditable\widgets\WysiHtml5::widget([
     'model' => $model,
     'pluginOptions' => [
         'toggle' => 'manual',
         'name' => 'content',
         'title' => 'Enter comments',
-    ],
-]);
-```
-
-DataGrid
---------
-
-```php
-$provider = new \yii\data\ActiveDataProvider([
-    'query' => Categories::find(),
-    'pagination' => [
-        'pageSize' => 4,
-    ],
-]);
-
-echo GridView::widget([
-    'id' => Yii::$app->controller->id,
-    'dataProvider' => $provider,
-    'columns' => [
-        [
-            'value' => function($model) {
-                return $model->active;
-            },
-            'class' => XEditableColumn::className(),
-            'url' => 'editable',
-            'dataType' => 'select',
-            'editable'=>[
-                'source'=>[
-                    [
-                        'value' => 1,
-                        'text' => Yii::t('app', 'On'),
-                    ],
-                    [
-                        'value' => 0,
-                        'text' => Yii::t('app', 'Off'),
-                    ],
-                ],
-                'placement' => 'right',
-            ],
-            'attribute' => 'status',
-            'format' => 'raw',
-        ],
-        'title',
     ],
 ]);
 ```
@@ -354,3 +304,50 @@ echo XEditable::widget([
     ]
 ]);
 ```
+
+DataGrid
+--------
+
+```php
+$provider = new \yii\data\ActiveDataProvider([
+    'query' => Categories::find(),
+    'pagination' => [
+        'pageSize' => 4,
+    ],
+]);
+
+echo GridView::widget([
+    'id' => Yii::$app->controller->id,
+    'dataProvider' => $provider,
+    'columns' => [
+        [
+            'value' => function($model) {
+                return $model->active;
+            },
+            'class' => XEditableColumn::className(),
+            'url' => 'editable',
+            'dataType' => 'select',
+            'editable'=>[
+                'source'=>[
+                    [
+                        'value' => 1,
+                        'text' => Yii::t('app', 'On'),
+                    ],
+                    [
+                        'value' => 0,
+                        'text' => Yii::t('app', 'Off'),
+                    ],
+                ],
+                'placement' => 'right',
+            ],
+            'attribute' => 'status',
+            'format' => 'raw',
+        ],
+        'title',
+    ],
+]);
+```
+
+## Features
+
+- Server-side validation support (error messages output after validation).
